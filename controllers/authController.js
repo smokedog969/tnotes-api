@@ -30,8 +30,8 @@ const login = async (req, res) => {
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
-        //{ expiresIn: '15m' }
-        { expiresIn: '8h' }
+        { expiresIn: '15m' }
+        //{ expiresIn: '8h' }
     )
 
     const refreshToken = jwt.sign(
@@ -44,7 +44,8 @@ const login = async (req, res) => {
     res.cookie('jwt', refreshToken, {
         httpOnly: true, //accessible only by web server 
         secure: true, //https
-        sameSite: 'None', //cross-site cookie 
+        //sameSite: 'None', //cross-site cookie 
+        sameSite: 'lax', //cross-site cookie 
         maxAge: 7 * 24 * 60 * 60 * 1000 //cookie expiry: set to match rT
     })
 
